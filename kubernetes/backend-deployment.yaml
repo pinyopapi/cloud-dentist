@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+        - name: backend
+          image: <YOUR_DOCKERHUB_USERNAME>/devops-demo-backend:latest
+          env:
+            - name: DB_HOST
+              value: postgres
+            - name: DB_USER
+              value: devuser
+            - name: DB_PASS
+              value: devpass
+            - name: DB_NAME
+              value: devdb
+          ports:
+            - containerPort: 5000
