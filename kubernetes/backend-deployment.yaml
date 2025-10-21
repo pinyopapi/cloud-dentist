@@ -14,15 +14,25 @@ spec:
     spec:
       containers:
         - name: backend
-          image: <YOUR_DOCKERHUB_USERNAME>/devops-demo-backend:latest
-          env:
-            - name: DB_HOST
-              value: postgres
-            - name: DB_USER
-              value: devuser
-            - name: DB_PASS
-              value: devpass
-            - name: DB_NAME
-              value: devdb
+          image: <example>/devops-demo-backend:latest
           ports:
             - containerPort: 5000
+          env:
+            - name: DB_HOST
+              value: "<RDS_ENDPOINT_FROM_TERRAFORM>"
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: DB_USER
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: DB_PASSWORD
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 5000
+            initialDelaySeconds: 5
+            periodSeconds: 10
