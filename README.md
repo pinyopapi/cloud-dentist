@@ -45,13 +45,32 @@ To push images to DockerHub, (replace < example > with your DockerHub username)
 
 `docker build -t <example>/devops-demo-frontend ./frontend`  
 `docker push <example>/devops-demo-frontend` 
+## 📦 or AWS ECR Deployment
+
+1. Creating ECR for backend/frontend
+    `aws ecr create-repository --repository-name devops-demo-backend`    
+    `aws ecr create-repository --repository-name devops-demo-frontend`
+
+2. Auth docker with ECR(change region/account id)
+
+    `aws ecr get-login-password --region <aws_region> | docker login --username AWS --password-stdin <aws_account_id>.dkr.ecr.<aws_region>.amazonaws.com`
+
+1. Build and Push
+
+    `docker build -t devops-demo-backend ./backend`  
+    `docker tag devops-demo-backend:latest <aws_account_id>.dkr.ecr.<aws_region>.amazonaws.com/`  
+    `devops-demo-backend:latest`  
+    `docker push <aws_account_id>.dkr.ecr.<aws_region>.amazonaws.com/devops-demo-backend:latest`  
 
 ---
-Before running the project, update the following placeholders in the files:
-- Docker images: Replace < example > with your DockerHub username in:
+
+### Before running the project, update the following placeholders in the files:
+- Replace "example" with your **DockerHub** or **AWS id** in:
   - backend-deployment.yaml
+  - example:
+    - Docker:  `image: docker_hub_username/devops-demo-backend:latest`
+    - AWS: `image: 123456789012.dkr.ecr.eu-central-1.amazonaws.com/devops-demo-backend:latest`
   - frontend-deployment.yaml
-  - docker-compose.yaml (if pushing/pulling images from DockerHub)
 - RDS / Database endpoint: Replace <RDS_ENDPOINT_FROM_TERRAFORM> in:
   - backend-deployment.yaml → environment variable DB_HOST
   - Local ports (if needed):
