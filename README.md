@@ -113,6 +113,65 @@ To push images to DockerHub, (replace < example > with your DockerHub username)
   - `terraform/` 🛠️  
   - `docker-compose.yaml` 🐳  
 
+
+## 🚀 Roadmap / Future Development
+
+Here are some planned improvements and features for the DevOps Demo project:
+
+### ☁️ Cloud & Infrastructure
+- Move DB to AWS RDS for fully cloud-based setup
+- Implement Kubernetes ConfigMaps and Secrets for configuration
+- Add Horizontal Pod Autoscaling (HPA) for backend & frontend
+- Add basic logging/monitoring
+
+### 🐳 Docker & Deployment
+- Automate image build & push to AWS ECR
+- Optional: setup GitHub Actions for CI/CD pipeline
+
+## 🧭 Troubleshooting / Common Issues
+
+Here are some common issues you might encounter when running the DevOps Demo project, and how to fix them.
+
+### 🔹 AWS ECR Authentication
+**Problem:** Docker cannot push/pull images to ECR.  
+**Solution:** Make sure you are logged in:
+
+aws ecr get-login-password --region <aws_region> | docker login --username AWS --password-stdin <aws_account_id>.dkr.ecr.<aws_region>.amazonaws.com
+
+Replace `<aws_region>` and `<aws_account_id>` with your values.
+
+---
+
+### 🔹 Kubernetes EXTERNAL-IP Not Showing
+**Problem:** LoadBalancer IP remains `<pending>`.  
+**Solution:**  
+- Wait a few minutes, AWS needs time to provision the ELB.  
+- Check service status: `kubectl describe svc frontend`  
+
+---
+
+### 🔹 Database Connection Errors
+**Problem:** Backend cannot connect to DB.  
+**Solution:**  
+- Verify your DB credentials in `.env` or `terraform.tfvars`.  
+- If using local Docker Compose, ensure the DB container is up: `docker-compose ps`  
+
+---
+
+### 🔹 Port Conflicts
+**Problem:** Frontend or backend fails to start.  
+**Solution:**  
+- Change the default ports in `docker-compose.yaml` (avoid port 5000 on MacOS).  
+
+---
+
+### 🔹 Terraform Apply Issues
+**Problem:** `terraform apply` fails.  
+**Solution:**  
+- Make sure AWS CLI is configured with correct credentials.  
+- Check for missing required variables in `terraform.tfvars`.  
+
+
 ## Contributors
- - GITHUB -> [pinyopapi](https://github.com/pinyopapi)
+ - GITHUB  [pinyopapi](https://github.com/pinyopapi)
 ---
