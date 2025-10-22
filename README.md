@@ -150,14 +150,6 @@ Replace `<aws_region>` and `<aws_account_id>` with your values.
 
 ---
 
-### 🔹 Database Connection Errors
-**Problem:** Backend cannot connect to DB.  
-**Solution:**  
-- Verify your DB credentials in `.env` or `terraform.tfvars`.  
-- If using local Docker Compose, ensure the DB container is up: `docker-compose ps`  
-
----
-
 ### 🔹 Port Conflicts
 **Problem:** Frontend or backend fails to start.  
 **Solution:**  
@@ -169,9 +161,7 @@ Replace `<aws_region>` and `<aws_account_id>` with your values.
 **Problem:** `terraform apply` fails.  
 **Solution:**  
 - Make sure AWS CLI is configured with correct credentials.  
-- Check for missing required variables in `terraform.tfvars`.  
-
-
+Correction
 ## Contributors
  - GITHUB  [pinyopapi](https://github.com/pinyopapi)
 ---
