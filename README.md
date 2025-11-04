@@ -3,22 +3,25 @@
 This is a **DevOps fullstack demo project** showcasing modern cloud-native technologies.
 Includes a Node.js backend, React frontend, PostgreSQL database, Docker containerization, Terraform-managed AWS infrastructure, and Kubernetes deployment.
 
-- 🖥️ Node.js + Express backend with REST API
-- 🌐 React frontend
-- 🗄️ PostgreSQL database
-- 🐳 Docker containerization & Docker Compose for local testing
-- ☁️ AWS EKS deployment using Terraform for infra provisioning
-- 🛠️ Configurable secrets via Kubernetes Secret and environment variables
-- ✅ Healthchecks for backend, frontend, and DB
+## 🛠️ Built With / Tech Stack  
+
+- 🖥️ [![Node.js](https://img.shields.io/badge/Node.js-runtime-green?logo=node.js&logoColor=white)](https://nodejs.org/) + [![Express](https://img.shields.io/badge/Express-framework-black?logo=express&logoColor=white)](https://expressjs.com/) — REST API backend  
+- 🌐 [![React](https://img.shields.io/badge/React-frontend-61DAFB?logo=react&logoColor=white)](https://react.dev/)  
+- 🗄️ [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-database-4169E1?logo=postgresql&logoColor=white)](https://www.postgresql.org/)  
+- 🐳 [![Docker](https://img.shields.io/badge/Docker-containerization-2496ED?logo=docker&logoColor=white)](https://www.docker.com/) + [![Docker Compose](https://img.shields.io/badge/Docker_Compose-local_testing-2496ED?logo=docker&logoColor=white)](https://docs.docker.com/compose/)  
+- ☁️ [![AWS EKS](https://img.shields.io/badge/AWS_EKS-deployment-FF9900?logo=amazon-eks&logoColor=white)](https://aws.amazon.com/eks/) + [![Terraform](https://img.shields.io/badge/Terraform-infra_provisioning-623CE4?logo=terraform&logoColor=white)](https://www.terraform.io/)  
+- 🛠️ [![Kubernetes Secrets](https://img.shields.io/badge/Kubernetes_Secrets-configuration-326CE5?logo=kubernetes&logoColor=white)](https://kubernetes.io/docs/concepts/configuration/secret/) + [![Environment Variables](https://img.shields.io/badge/Environment_Variables-config-green)](https://12factor.net/config)  
+- ✅ Healthchecks for backend, frontend, and database  
 
 ---
 
-## **Prerequisites / Dependencies**
+## ⚙️ **Prerequisites / Dependencies**  
 
-- Docker & Docker Compose
-- Node.js 200
-- AWS CLI configured
-- kubectl installed
+- [![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white)](https://www.docker.com/) & [![Docker Compose](https://img.shields.io/badge/Docker_Compose-2496ED?logo=docker&logoColor=white)](https://docs.docker.com/compose/)  
+- [![Node.js](https://img.shields.io/badge/Node.js-20-green?logo=node.js&logoColor=white)](https://nodejs.org/)  
+- [![AWS CLI](https://img.shields.io/badge/AWS_CLI-configured-FF9900?logo=amazonaws&logoColor=white)](https://aws.amazon.com/cli/)  
+- [![kubectl](https://img.shields.io/badge/kubectl-installed-326CE5?logo=kubernetes&logoColor=white)](https://kubernetes.io/docs/tasks/tools/)  
+
 
 ---
 
@@ -162,6 +165,7 @@ Replace `<aws_region>` and `<aws_account_id>` with your values.
 **Solution:**  
 - Make sure AWS CLI is configured with correct credentials.  
 Correction
+
 ## Contributors
  - GITHUB  [pinyopapi](https://github.com/pinyopapi)
 ---
