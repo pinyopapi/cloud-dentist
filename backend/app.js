@@ -1,9 +1,25 @@
-const express = require("express");
+import express from "express";
+import pkg from "pg";
+const { Pool } = pkg;
+
 const app = express();
 const PORT = 5000;
 
-app.get("/api/message", (req, res) => {
-  res.json({ message: "Hello from the backend!" });
+const pool = new Pool({
+  host: process.env.DB_HOST || "localhost",
+  user: process.env.DB_USER || "devuser",
+  password: process.env.DB_PASSWORD || "devpass",
+  database: process.env.DB_NAME || "devdb",
+});
+
+app.get("/api/messages", async (req, res) => {
+  try {
+    const result = await pool.query("SELECT * FROM messages");
+    res.json(result.rows);
+  } catch (err) {
+    console.error("DB error:", err);
+    res.status(500).json({ error: "Database connection failed" });
+  }
 });
 
 app.listen(PORT, "0.0.0.0", () => {
