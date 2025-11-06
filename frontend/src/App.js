@@ -1,29 +1,22 @@
-import express from "express";
-import pkg from "pg";
-const { Pool } = pkg;
+import { useEffect, useState } from "react";
 
-const app = express();
-const PORT = 5000;
+function App() {
+  const [message, setMessage] = useState("");
 
-const pool = new Pool({
-  host: process.env.DB_HOST || "localhost",
-  user: process.env.DB_USER || "devuser",
-  password: process.env.DB_PASSWORD || "devpass",
-  database: process.env.DB_NAME || "devdb",
-});
+  useEffect(() => {
+    const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:5000";
+    fetch(`${apiUrl}/api/message`)
+      .then((res) => res.json())
+      .then((data) => setMessage(data.message))
+      .catch(() => setMessage("Backend not reachable"));
+  }, []);
 
-app.get("/api/messages", async (req, res) => {
-  try {
-    const result = await pool.query("SELECT * FROM messages");
-    res.json(result.rows);
-  } catch (err) {
-    console.error("DB error:", err);
-    res.status(500).json({ error: "Database connection failed" });
-  }
-});
+  return (
+    <div style={{ padding: "2rem", fontFamily: "sans-serif", textAlign: "center" }}>
+      <h1>Cloud Dentist</h1>
+      <p>{message}</p>
+    </div>
+  );
+}
 
-app.get("/health", (req, res) => res.send("OK"));
-
-app.listen(PORT, "0.0.0.0", () => {
-  console.log(`Backend running on port ${PORT}`);
-});
+export default App;
