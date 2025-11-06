@@ -22,6 +22,8 @@ app.get("/api/messages", async (req, res) => {
   }
 });
 
+app.get("/health", (req, res) => res.send("OK"));
+
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`Backend running on port ${PORT}`);
 });
