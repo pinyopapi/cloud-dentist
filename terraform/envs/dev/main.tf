@@ -1,6 +1,16 @@
+######################################
+#  Dev environment main configuration
+######################################
+
 module "s3" {
   source      = "../../modules/s3"
   bucket_name = "devops-demo-bucket-12345"
+}
+
+module "eks" {
+  source       = "../../modules/eks"
+  cluster_name = "devops-demo-eks"
+  region       = "eu-central-1"
 }
 
 module "rds" {
@@ -10,10 +20,6 @@ module "rds" {
   password          = "devpass"
   allocated_storage = 20
 
-  vpc_id     = module.vpc.vpc_id
-  subnet_ids = module.vpc.subnet_ids
-}
-
-module "vpc" {
-  source = "../../modules/vpc"
+  vpc_id     = module.eks.vpc_id
+  subnet_ids = module.eks.subnet_ids
 }
