@@ -5,7 +5,7 @@ function App() {
 
   useEffect(() => {
     const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:5000";
-    fetch(`${apiUrl}/api/message`)
+    fetch(`${apiUrl}/api/messages`)
       .then((res) => res.json())
       .then((data) => setMessage(data.message))
       .catch(() => setMessage("Backend not reachable"));
