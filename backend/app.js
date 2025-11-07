@@ -1,9 +1,12 @@
 import express from "express";
+import cors from "cors";
 import pkg from "pg";
 const { Pool } = pkg;
 
 const app = express();
 const PORT = 5000;
+
+app.use(cors());
 
 const pool = new Pool({
   host: process.env.DB_HOST || "localhost",
