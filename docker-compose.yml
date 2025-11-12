@@ -1,4 +1,3 @@
-version: "3.9"
 services:
   db:
     image: postgres:15
@@ -6,10 +5,10 @@ services:
       POSTGRES_DB: devdb
       POSTGRES_USER: devuser
       POSTGRES_PASSWORD: devpass
-    ports:
-      - "5432:5432"
+    volumes: 
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U devuser"]
+      test: ["CMD-SHELL", "pg_isready -U devuser -d devdb"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -18,6 +17,7 @@ services:
     build: ./backend
     environment:
       DB_HOST: db
+      DB_NAME: devdb
       DB_USER: devuser
       DB_PASSWORD: devpass
     ports:
@@ -34,13 +34,13 @@ services:
   frontend:
     build: ./frontend
     environment: 
-      REACT_APP_API_URL: http://backend:5000
+      REACT_APP_API_URL: http://localhost:5000
     ports:
-      - "3000:3000"
+      - "80:80"
     depends_on:
       - backend
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3000"]
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:5000/health"]
       interval: 10s
       timeout: 5s
       retries: 5
